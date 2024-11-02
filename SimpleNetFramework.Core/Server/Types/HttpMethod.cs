@@ -14,6 +14,5 @@ namespace SimpleNetFramework.Core.Server.Types
         Options,
         Trace,
         Path
-        
     }
 }

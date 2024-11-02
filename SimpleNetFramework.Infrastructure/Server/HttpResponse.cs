@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SimpleNetFramework.Core.Server;
 
 namespace SimpleNetFramework.Infrastructure.Server
@@ -18,7 +19,7 @@ namespace SimpleNetFramework.Infrastructure.Server
         {
         }
 
-        public HttpResponse(int statusCode, string message, byte[] body, string protocol = "HTTP/1.1")
+        public HttpResponse(int statusCode, string message, byte[] body, string protocol)
         {
             StatusCode = statusCode;
             Message = message;

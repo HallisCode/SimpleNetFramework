@@ -9,6 +9,6 @@ namespace SimpleNetFramework.Core.Middleware
     public interface IMiddleware<TRequest> where TRequest : class
     {
         MiddlewareDelegate<TRequest> Next { get; }
-        Task Invoke(TRequest httpRequest);
+        Task Invoke(TRequest request);
     }
 }

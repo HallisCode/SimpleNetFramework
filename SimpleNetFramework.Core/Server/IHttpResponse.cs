@@ -10,7 +10,7 @@ namespace SimpleNetFramework.Core.Server
         string Protocol { get; set; }
         int StatusCode { get; set; }
         string Message { get; set; }
-        
+
         Dictionary<string, string> Headers { get; set; }
         byte[] Body { get; set; }
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
+using HttpMethod = SimpleNetFramework.Core.Server.Types.HttpMethod;
 
 namespace SimpleNetFramework.Core.Server
 {
