@@ -6,10 +6,10 @@ namespace SimpleNetFramework.Core
     /// <summary>
     /// Представляет builder для <see cref="IWebApplication"/>.
     /// </summary>
-    public interface IWebApplicationBuilder
+    public interface IWebApplicationBuilder<TRequestPipline> where TRequestPipline : class
     {
         IServiceCollection Services { get; }
         IServer Server { get; }
-        IWebApplication Build();
+        IWebApplication<TRequestPipline> Build();
     }
 }

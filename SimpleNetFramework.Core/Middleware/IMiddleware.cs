@@ -6,9 +6,9 @@ namespace SimpleNetFramework.Core.Middleware
     /// <summary>
     /// Представляет Middleware, участвующий в pipeline.
     /// </summary>
-    public interface IMiddleware
+    public interface IMiddleware<TRequest> where TRequest : class
     {
-        RequestDelegate Next { get; }
-        Task Invoke(IServerRequest httpRequest);
+        MiddlewareDelegate<TRequest> Next { get; }
+        Task Invoke(TRequest httpRequest);
     }
 }

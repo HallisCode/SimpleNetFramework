@@ -5,8 +5,8 @@ namespace SimpleNetFramework.Core.Server
     /// </summary>
     public interface IServerRequest
     {
-        IHttpRequest HttpRequest { get; }
-        IHttpResponse HttpResponse { get; set; }
+        IHttpRequest Request { get; }
+        IHttpResponse Response { get; set; }
 
         bool isResponseSet { get; }
     }
