@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{127A5E8A-4F6B-4ABA-9B32-1BF19D17C76C}"
+#
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleNetFramework.Core", "SimpleNetFramework.Core\SimpleNetFramework.Core.csproj", "{82EF492F-6617-4085-B00D-41D9618D7289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleNetFramework", "SimpleNetFramework\SimpleNetFramework.csproj", "{82EF492F-6617-4085-B00D-41D9618D7289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleNetFramework.Infrastructure", "SimpleNetFramework.Infrastructure\SimpleNetFramework.Infrastructure.csproj", "{C60320FC-B34E-409A-B28C-F537EDA219E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{127A5E8A-4F6B-4ABA-9B32-1BF19D17C76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{127A5E8A-4F6B-4ABA-9B32-1BF19D17C76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{127A5E8A-4F6B-4ABA-9B32-1BF19D17C76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{127A5E8A-4F6B-4ABA-9B32-1BF19D17C76C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82EF492F-6617-4085-B00D-41D9618D7289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82EF492F-6617-4085-B00D-41D9618D7289}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82EF492F-6617-4085-B00D-41D9618D7289}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82EF492F-6617-4085-B00D-41D9618D7289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C60320FC-B34E-409A-B28C-F537EDA219E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C60320FC-B34E-409A-B28C-F537EDA219E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C60320FC-B34E-409A-B28C-F537EDA219E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C60320FC-B34E-409A-B28C-F537EDA219E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

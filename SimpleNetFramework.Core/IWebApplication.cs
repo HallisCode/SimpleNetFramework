@@ -1,10 +1,12 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
-using SimpleNetFramework.Middleware;
+using SimpleNetFramework.Core.Middleware;
 
-namespace SimpleNetFramework.WebApplication
+namespace SimpleNetFramework.Core
 {
+    /// <summary>
+    /// Представляет веб приложение с DI контейнером и pipeline.
+    /// </summary>
     public interface IWebApplication : IDisposable
     {
         public IServiceProvider? Services { get; }

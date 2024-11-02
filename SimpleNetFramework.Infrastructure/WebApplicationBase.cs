@@ -1,28 +1,48 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using SimpleNetFramework.Middleware;
+using SimpleNetFramework.Core;
+using SimpleNetFramework.Core.Middleware;
+using SimpleNetFramework.Core.Server;
 
-namespace SimpleNetFramework.WebApplication
+namespace SimpleNetFramework.Infrastructure.WebApplication
 {
+    /// <summary>
+    /// Базовая заготовка для реализации собственного WebApplication.
+    /// </summary>
     public abstract class WebApplicationBase : IWebApplication
     {
         protected bool _disposed;
         protected IList<IMiddleware> _middlewares = new List<IMiddleware>();
         protected IServiceProvider? _serviceProvider;
+        protected IServer _server;
 
         public IServiceProvider? Services
         {
             get => _serviceProvider;
         }
 
-        public abstract Task StartAsync();
+        public WebApplicationBase(IServer server, IServiceProvider provider)
+        {
+            _server = server;
+            _serviceProvider = provider;
+        }
 
-        public abstract Task StopAsync();
+        public virtual async Task StartAsync()
+        {
+            _ChainMiddleware();
+            _server.SetHandler(HandleServerRequest);
 
-        
+            await _server.StartAsync();
+        }
+
+        public virtual async Task StopAsync()
+        {
+            await _server.StopAsync();
+        }
+
+        /// <summary>
+        /// Добавляет миддлварь в pipeline обработки.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Не удалось найти зависимости для этого миддлваря.</exception>
         public void UseMiddleware<TMiddleware>() where TMiddleware : IMiddleware
         {
             ConstructorInfo? constructor = typeof(TMiddleware).GetConstructors().FirstOrDefault();
@@ -59,7 +79,13 @@ namespace SimpleNetFramework.WebApplication
         }
         
         /// <summary>
-        /// Связывает миддлвари по цепочке
+        /// Обрабатывает входящий запрос <see cref="IServerRequest"/> от сервера <see cref="IServer"/>.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract Task HandleServerRequest(IServerRequest request);
+
+        /// <summary>
+        /// Связывает миддлвари по цепочке.
         /// </summary>
         protected void _ChainMiddleware()
         {
@@ -84,7 +110,6 @@ namespace SimpleNetFramework.WebApplication
 
             if (disposing)
             {
-
             }
 
             _disposed = true;
