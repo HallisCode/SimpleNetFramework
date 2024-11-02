@@ -21,7 +21,7 @@ namespace SimpleNetFramework.Infrastructure.Server
             Method = method;
             Route = route;
             Protocol = protocol;
-            Body = body;
+            Body = body ?? new byte[0];
             Headers = new Dictionary<string, string>();
         }
     }

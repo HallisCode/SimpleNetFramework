@@ -23,7 +23,7 @@ namespace SimpleNetFramework.Infrastructure.Server
         {
             StatusCode = statusCode;
             Message = message;
-            Body = body;
+            Body = body ?? new byte[0];
             Protocol = protocol;
         }
     }
