@@ -111,6 +111,7 @@ namespace SimpleNetFramework.Infrastructure
 
             if (disposing)
             {
+                _server.Dispose();
             }
 
             _disposed = true;
