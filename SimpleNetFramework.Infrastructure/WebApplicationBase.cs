@@ -13,29 +13,36 @@ namespace SimpleNetFramework.Infrastructure
     /// Базовая заготовка для реализации собственного WebApplication.
     /// </summary>
     public abstract class WebApplicationBase<TRequestPipline> : IWebApplication<TRequestPipline>
-        where TRequestPipline : class
     {
-        protected bool _disposed;
+        // Handle logic
         protected IList<IMiddleware<TRequestPipline>> _middlewares = new List<IMiddleware<TRequestPipline>>();
-        protected IServiceProvider? _serviceProvider;
-        protected IServer _server;
+        protected readonly IServer _server;
+
+        // DI logic
+        protected readonly IServiceProvider? _serviceProvider;
+
+        protected bool _disposed;
 
         public IServiceProvider? Services
         {
             get => _serviceProvider;
         }
 
-        public WebApplicationBase(IServer server, IServiceProvider provider)
+        public WebApplicationBase(
+            IServer server,
+            IServiceProvider provider
+        )
         {
             _server = server;
             _serviceProvider = provider;
+            
+            _server.SetHandler(HandleServerRequest);
         }
 
         public virtual async Task StartAsync()
         {
             _ChainMiddleware();
-            _server.SetHandler(HandleServerRequest);
-
+            
             await _server.StartAsync();
         }
 
@@ -60,7 +67,7 @@ namespace SimpleNetFramework.Infrastructure
 
             ParameterInfo[] neededParameters = constructor.GetParameters();
 
-            IList<object> readyServices = new List<object>();
+            IList<object> resolvedServices = new List<object>();
             foreach (ParameterInfo parameter in neededParameters)
             {
                 Type neededType = parameter.ParameterType;
@@ -75,10 +82,10 @@ namespace SimpleNetFramework.Infrastructure
                     );
                 }
 
-                readyServices.Add(service);
+                resolvedServices.Add(service);
             }
 
-            TMiddleware middleware = (TMiddleware)constructor.Invoke(readyServices.ToArray());
+            TMiddleware middleware = (TMiddleware)constructor.Invoke(resolvedServices.ToArray());
 
             _middlewares.Add(middleware);
         }

@@ -7,7 +7,7 @@ namespace SimpleNetFramework.Core
     /// <summary>
     /// Представляет веб приложение с DI контейнером и pipeline.
     /// </summary>
-    public interface IWebApplication<TRequest> : IDisposable where TRequest : class
+    public interface IWebApplication<TRequest> : IDisposable
     {
         public IServiceProvider? Services { get; }
 
