@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 
 namespace SimpleNetFramework.Core.Server
 {
@@ -8,7 +9,7 @@ namespace SimpleNetFramework.Core.Server
     public interface IHttpResponse
     {
         string Protocol { get; set; }
-        int StatusCode { get; set; }
+        HttpStatusCode StatusCode { get; set; }
         string Message { get; set; }
 
         Dictionary<string, string> Headers { get; set; }

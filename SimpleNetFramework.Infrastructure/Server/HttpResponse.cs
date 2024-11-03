@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 using SimpleNetFramework.Core.Server;
 
 namespace SimpleNetFramework.Infrastructure.Server
@@ -9,7 +10,7 @@ namespace SimpleNetFramework.Infrastructure.Server
     public class HttpResponse : IHttpResponse
     {
         public string Protocol { get; set; }
-        public int StatusCode { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
         public string Message { get; set; }
 
         public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
@@ -19,7 +20,7 @@ namespace SimpleNetFramework.Infrastructure.Server
         {
         }
 
-        public HttpResponse(int statusCode, string message, byte[] body, string protocol)
+        public HttpResponse(HttpStatusCode statusCode, string message, byte[] body, string protocol)
         {
             StatusCode = statusCode;
             Message = message;
