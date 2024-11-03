@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using SimpleNetFramework.Core.Server;
-using SimpleNetFramework.Core.Server.Types;
 
 namespace SimpleNetFramework.Infrastructure.Server
 {
