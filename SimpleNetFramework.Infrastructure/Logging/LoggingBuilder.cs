@@ -5,6 +5,6 @@ namespace SimpleNetFramework.Infrastructure.Logging
 {
     public class LoggingBuilder : ILoggingBuilder
     {
-        public IServiceCollection Services { get; }
+        public IServiceCollection Services { get; } = new ServiceCollection();
     }
 }
