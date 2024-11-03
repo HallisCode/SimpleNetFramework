@@ -7,15 +7,16 @@ namespace SimpleNetFramework.Infrastructure.Middlewares
 {
     public class ExceptionHandlerMiddleware<TRequest> : IMiddleware<TRequest>
     {
+        private int currentError = 0;
         private readonly ILogger<ExceptionHandlerMiddleware<TRequest>> _logger;
         private MiddlewareDelegate<TRequest> _next;
-        
+
         public MiddlewareDelegate<TRequest> Next
         {
             set => _next = value;
         }
 
-        
+
         public ExceptionHandlerMiddleware(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<ExceptionHandlerMiddleware<TRequest>>();
@@ -29,7 +30,11 @@ namespace SimpleNetFramework.Infrastructure.Middlewares
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Unhandled error");
+                _logger.LogError(
+                    new EventId(currentError++, "Unhandled error"),
+                    exception,
+                    "Middlewares Pipeline Request Processing"
+                );
             }
         }
     }
