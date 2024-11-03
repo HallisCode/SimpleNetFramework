@@ -8,10 +8,14 @@ namespace SimpleNetFramework.Infrastructure.Middlewares
     public class ExceptionHandlerMiddleware<TRequest> : IMiddleware<TRequest>
     {
         private readonly ILogger<ExceptionHandlerMiddleware<TRequest>> _logger;
+        private MiddlewareDelegate<TRequest> _next;
+        
+        public MiddlewareDelegate<TRequest> Next
+        {
+            set => _next = value;
+        }
 
-        public MiddlewareDelegate<TRequest> Next { get; }
-
-
+        
         public ExceptionHandlerMiddleware(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<ExceptionHandlerMiddleware<TRequest>>();
@@ -21,7 +25,7 @@ namespace SimpleNetFramework.Infrastructure.Middlewares
         {
             try
             {
-                await Next.Invoke(request);
+                await _next.Invoke(request);
             }
             catch (Exception exception)
             {

@@ -35,14 +35,14 @@ namespace SimpleNetFramework.Infrastructure
         {
             _server = server;
             _serviceProvider = provider;
-            
+
             _server.SetHandler(HandleServerRequest);
         }
 
         public virtual async Task StartAsync()
         {
             _ChainMiddleware();
-            
+
             await _server.StartAsync();
         }
 
@@ -106,7 +106,11 @@ namespace SimpleNetFramework.Infrastructure
             {
                 PropertyInfo nextPropertyInfo = typeof(IMiddleware<TRequestPipline>).GetProperty("Next")!;
 
-                nextPropertyInfo.SetValue(_middlewares[i], _middlewares[i + 1]);
+                MiddlewareDelegate<TRequestPipline> nextInvoke = new MiddlewareDelegate<TRequestPipline>(
+                    _middlewares[i + 1].Invoke
+                );
+
+                nextPropertyInfo.SetValue(_middlewares[i], nextInvoke);
             }
         }
 

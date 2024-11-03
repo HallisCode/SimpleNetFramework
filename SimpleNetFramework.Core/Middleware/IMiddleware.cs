@@ -8,7 +8,7 @@ namespace SimpleNetFramework.Core.Middleware
     /// </summary>
     public interface IMiddleware<TRequest>
     {
-        MiddlewareDelegate<TRequest> Next { get; }
+        MiddlewareDelegate<TRequest> Next { set; }
         Task Invoke(TRequest request);
     }
 }
