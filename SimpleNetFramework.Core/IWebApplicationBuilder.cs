@@ -7,7 +7,7 @@ namespace SimpleNetFramework.Core
     /// <summary>
     /// Представляет builder для <see cref="IWebApplication"/>.
     /// </summary>
-    public interface IWebApplicationBuilder<TWebApplication> where TWebApplication : class
+    public interface IWebApplicationBuilder<TWebApplication>
     {
         ILoggingBuilder Logging { get; }
         IServiceCollection Services { get; }
