@@ -10,7 +10,7 @@ namespace SimpleNetFramework.Core
     /// </summary>
     public interface IWebApplicationBuilder<TWebApplication>
     {
-        IConfigurationBuilder Configuration { get; }
+        IConfigurationManager Configuration { get; }
         ILoggingBuilder Logging { get; }
         IServiceCollection Services { get; }
         IServer? Server { get; }
