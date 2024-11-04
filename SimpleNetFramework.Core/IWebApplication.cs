@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using SimpleNetFramework.Core.Middleware;
 
 namespace SimpleNetFramework.Core
@@ -9,6 +11,9 @@ namespace SimpleNetFramework.Core
     /// </summary>
     public interface IWebApplication<TRequest> : IDisposable
     {
+        IConfigurationRoot Configuration { get; }
+        ILogger Logger { get; }
+        
         public IServiceProvider? Services { get; }
 
         Task StartAsync();

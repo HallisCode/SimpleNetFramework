@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using SimpleNetFramework.Core;
 using SimpleNetFramework.Core.Middleware;
 using SimpleNetFramework.Core.Server;
@@ -18,23 +20,26 @@ namespace SimpleNetFramework.Infrastructure
         protected IList<IMiddleware<TRequestPipline>> _middlewares = new List<IMiddleware<TRequestPipline>>();
         protected readonly IServer _server;
 
-        // DI logic
-        protected readonly IServiceProvider? _serviceProvider;
-
         protected bool _disposed;
 
-        public IServiceProvider? Services
-        {
-            get => _serviceProvider;
-        }
+        // DI logic
+        public IServiceProvider? Services { get; init; }
+        public IConfigurationRoot Configuration { get; init; }
+        public ILogger Logger { get; init; }
+
 
         public WebApplicationBase(
             IServer server,
-            IServiceProvider provider
+            IServiceProvider provider,
+            IConfigurationRoot configuration,
+            ILogger logger
         )
         {
             _server = server;
-            _serviceProvider = provider;
+
+            Services = provider;
+            Configuration = configuration;
+            Logger = Logger;
 
             _server.SetHandler(HandleServerRequest);
         }
@@ -72,7 +77,7 @@ namespace SimpleNetFramework.Infrastructure
             {
                 Type neededType = parameter.ParameterType;
 
-                object? service = _serviceProvider?.GetService(neededType);
+                object? service = Services?.GetService(neededType);
 
                 if (service is null)
                 {
